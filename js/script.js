@@ -1,7 +1,9 @@
 var searchButton = document.querySelector('.button-search');
 var popup = document.querySelector('.pop-up');
+var popupWrapper = document.querySelector('.pop-up-wrapper');
 var indexForm = document.querySelector('.hotel-search');
 
+var liForm = document.querySelector('.hotel-search-item');
 var inputArrival = indexForm.querySelector('[name=arrival-date]');
 var inputLeaving = indexForm.querySelector('[name=date-of-leaving]');
 var adultAmount = indexForm.querySelector('[name=amount-of-adult]');
@@ -26,10 +28,15 @@ searchButton.addEventListener('click', function (evt) {
     };
 });
 
+
+
 indexForm.addEventListener('submit', function (evt) {
     if (!inputArrival.value || !inputLeaving.value) {
         evt.preventDefault();
-        console.log('Необходимо заполнить дату');
+        popup.classList.add('modal-error');
+        setTimeout(function () {
+            popup.classList.remove('modal-error');
+        }, 1000);
     } else {
         localStorage.setItem('adult', adultAmount.value);
         localStorage.setItem('children', childrenAmount.value);
